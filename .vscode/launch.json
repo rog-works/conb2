@@ -10,7 +10,8 @@
 			"name": "Electron Main",
 			"runtimeExecutable": "${workspaceFolder}\\node_modules\\.bin\\electron.cmd",
 			"program": "${workspaceFolder}\\dist\\Index.js",
-			"protocol": "legacy"
+			"protocol": "inspector",
+			"preLaunchTask": "build"
 		},
 		{
 			"type": "node",
