@@ -8,8 +8,8 @@ class Application {
 	}
 
 	private bind() {
-		this.app.on('window-all-closed', this.onWindowAllClosed);
-		this.app.on('ready', this.onReady);
+		this.app.on('window-all-closed', this.onWindowAllClosed.bind(this));
+		this.app.on('ready', this.onReady.bind(this));
 	}
 
 	private onWindowAllClosed() {
@@ -35,8 +35,8 @@ class MainWindow {
 			acceptFirstMouse: true,
 			titleBarStyle: 'hidden'
 		});
-		this.mainWindow.on('close', this.onClose);
-		this.mainWindow.loadURL(`file://${__dirname}/index.html`);
+		this.mainWindow.on('close', this.onClose.bind(this));
+		this.mainWindow.loadURL(`file:///E:/conb2/src/index.html`);
 	}
 
 	public onClose() {
