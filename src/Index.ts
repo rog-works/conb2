@@ -1,4 +1,5 @@
 import * as electron from 'electron';
+import * as Path from 'path';
 
 class Application {
 	public constructor(
@@ -13,13 +14,20 @@ class Application {
 	}
 
 	private onWindowAllClosed() {
-		if (process.platform != 'darwin') {
+		if (process.platform !== 'darwin') {
 			this.app.quit();
 		}
 	}
 
 	private onReady() {
+		electron.protocol.interceptFileProtocol('file', this.onFilePathRequest.bind(this));
 		new MainWindow();
+	}
+
+	private onFilePathRequest(req: electron.InterceptFileProtocolRequest, callback: (filePath: string) => void) {
+		const url = req.url.substr('file://'.length);
+		const path = Path.isAbsolute(url) ? Path.normalize(Path.join(__dirname, '..', url)) : url;
+		callback(path);
 	}
 }
 
@@ -36,7 +44,7 @@ class MainWindow {
 			titleBarStyle: 'hidden'
 		});
 		this.mainWindow.on('close', this.onClose.bind(this));
-		this.mainWindow.loadURL(`file:///E:/conb2/src/index.html`);
+		this.mainWindow.loadURL('file:///public/index.html');
 	}
 
 	public onClose() {
