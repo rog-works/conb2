@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { WebviewTag } from 'electron';
 
 class Application {
 	public constructor(
@@ -16,16 +17,17 @@ class Application {
 				back: this.back.bind(this),
 				forward: this.forward.bind(this),
 				reload: this.reload.bind(this),
+				tools: this.tools.bind(this)
 			}
 		});
 	}
 
-	public get _webview(): any {
-		return document.querySelector('webview');
+	public get _webview() {
+		return <WebviewTag>document.querySelector('webview');
 	}
 
-	public get url(): string {
-		return this._webview.getAttribute('src');
+	public get url() {
+		return this._webview.getAttribute('src') || '';
 	}
 
 	public set url(value: string) {
@@ -52,6 +54,14 @@ class Application {
 		this._webview.reload();
 	}
 
+	public tools() {
+		//if (this._webview.isDevToolsOpened) {
+		//	this._webview.closeDevTools();
+		//} else {
+			this._webview.openDevTools();
+		//}
+	}
+
 	//reload(url) {
 	//	this.loaded = false;
 	//	fetch(url)
@@ -68,4 +78,3 @@ class Application {
 }
 
 new Application().bind('#main');
-
