@@ -17,7 +17,7 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Launch Program",
-			"program": "${workspaceFolder}\\dist\\Index.js"
+			"program": "${workspaceFolder}\\app\\dist\\Index.js"
 		}
 	]
 }

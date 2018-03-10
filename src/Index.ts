@@ -26,7 +26,7 @@ class Application {
 
 	private onFilePathRequest(req: electron.InterceptFileProtocolRequest, callback: (filePath: string) => void) {
 		const url = req.url.substr('file://'.length);
-		const path = Path.isAbsolute(url) ? Path.normalize(Path.join(__dirname, '..', url)) : url;
+		const path = Path.isAbsolute(url) ? Path.normalize(Path.join(__dirname, '../', 'public', url)) : url;
 		callback(path);
 	}
 }
@@ -44,7 +44,7 @@ class MainWindow {
 			titleBarStyle: 'hidden'
 		});
 		this.mainWindow.on('close', this.onClose.bind(this));
-		this.mainWindow.loadURL('file:///public/index.html');
+		this.mainWindow.loadURL('file:///index.html');
 	}
 
 	public onClose() {

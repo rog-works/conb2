@@ -3,106 +3,20 @@
 	<head>
 		<meta charset="utf8">
 		<title>Electron with TypeScript</title>
+		<link href="./vendors/normalize-5.0.0.min.css" rel="stylesheet">
+		<link href="./css/style.css" rel="stylesheet">
 		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-		<style>
-			body {
-				margin: 0;
-			}
-			.grid {
-				display: grid;
-			}
-			.grid.wh-4x2 {
-				grid-template-rows: 32px 1fr;
-				grid-template-columns: 32px 32px 32px 1fr;
-			}
-			.cell.w1-h1 { grid-row: 1; grid-column: 1; }
-			.cell.w2-h1 { grid-row: 1; grid-column: 2; }
-			.cell.w3-h1 { grid-row: 1; grid-column: 3; }
-			.cell.w4-h1 { grid-row: 1; grid-column: 4; }
-			.cell.w1-h2 { grid-row: 2 / 3; grid-column: 1 / 5; }
-			.fill {
-				width: 100%;
-				height: 100%;
-			}
-			.less {
-				border: none;
-				border-radius: 0;
-				outline: none;
-				margin: 0;
-				padding: 0;
-				resize: none;
-			}
-		</style>
 	</head>
 	<body class="fill">
-		<div id="main" class="fill">
-			<div class="grid wh-4x2 fill">
-				<div class="cell w1-h1"><i class="fill fa-arrow-left fa fa-fw" @click="back"></i></div>
-				<div class="cell w2-h1"><i class="fill fa-arrow-right fa fa-fw" @click="forward"></i></div>
-				<div class="cell w3-h1"><i class="fill fa-redo fa fa-fw" @click="reload"></i></div>
-				<div class="cell w4-h1"><input type="search" class="fill less" @keyup.enter="load" v-model="text" autocomplete="on"></div>
-				<webview class="cell w1-h2" src="" @dom-ready="preload" @did-start-loading="preload"></webview>
+		<div id="main" class="fill bc-1 flex column">
+			<div class="fill-x h-1 bc-2 grow-fix flex">
+				<div class="wh-1 grow-fix flex centering" @click="back"><i class="fa fa-arrow-left"></i></div>
+				<div class="wh-1 grow-fix flex centering" @click="forward"><i class="fa fa-arrow-right"></i></div>
+				<div class="wh-1 grow-fix flex centering" @click="reload"><i class="fa fa-redo"></i></div>
+				<div class="wh-1 grow-flex flex centering"><input type="search" class="fill-x h-hq less" @keyup.enter="load" v-model="text" autocomplete="on"></div>
 			</div>
+			<webview class="fill-x h-1 grow-flex" src="" @dom-ready="preload" @did-start-loading="preload"></webview>
 		</div>
-		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
-		<script>
-			class Application {
-				constructor() {
-					this.text = 'https://github.com/rog-works';
-					this.content = '';
-				}
-				bind(selector) {
-					new Vue({
-						el: selector,
-						data: this,
-						methods: {
-							load: this.load.bind(this),
-							preload: this.preload.bind(this),
-							back: this.back.bind(this),
-							forward: this.forward.bind(this),
-							reload: this.reload.bind(this),
-						}
-					});
-				}
-				get _webview() {
-					return document.querySelector('webview');
-				}
-				get url() {
-					return this._webview.getAttribute('src');
-				}
-				set url(value) {
-					this._webview.setAttribute('src', value);
-				}
-				load() {
-					this.url = this.text;
-				}
-				preload() {
-					this.text = this.url;
-				}
-				back() {
-					this._webview.goBack();
-				}
-				forward() {
-					this._webview.goForward();
-				}
-				reload() {
-					this._webview.reload();
-				}
-				//reload(url) {
-				//	this.loaded = false;
-				//	fetch(url)
-				//		.then(res => res.text())
-				//		.then(content => {
-				//			this.content = content;
-				//			this.loaded = true;
-				//		})
-				//		.catch(err => {
-				//			this.content = err;
-				//			this.loaded = true;
-				//		});
-				//}
-			}
-			new Application().bind('#main');
-		</script>
+		<script src="./js/bundle.js"></script>
 	</body>
 </html>

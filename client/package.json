@@ -1,0 +1,19 @@
+{
+  "name": "conb2",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "contents browser for frontend",
+  "repository": "git@github.com:rog-works/conb2.git",
+  "dependencies": {
+    "webpack": "^4.1.1"
+  },
+  "scripts": {
+    "watch": "node node_modules/webpack/bin/webpack.js --progress --colors --display-error-details --mode development --watch"
+  },
+  "devDependencies": {
+    "ts-loader": "^4.0.1",
+    "typescript": "^2.7.2",
+    "vue": "^2.5.14",
+    "webpack-cli": "^2.0.11"
+  }
+}
