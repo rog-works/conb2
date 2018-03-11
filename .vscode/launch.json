@@ -8,24 +8,24 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Electron Main Process",
-			"runtimeExecutable": "${workspaceFolder}\\node_modules\\.bin\\electron.cmd",
-			"program": "${workspaceFolder}\\dist\\Index.js",
+			"runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd",
+			"program": "${workspaceFolder}/dist/Index.js",
 			"protocol": "inspector",
 			"preLaunchTask": "build"
 		},
 		{
 			"type": "chrome",
 			"request": "launch",
-			"name": "Electron Renderer",
+			"name": "Electron Renderer Process",
 			"runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd",
 			"runtimeArgs": [
-			  "${workspaceRoot}/dist/Index.js",
+			  "${workspaceFolder}/dist/Index.js",
 			  "--remote-debugging-port=9222"
 			],
 			"webRoot": "${workspaceFolder}/public",
 			"sourceMaps": true,
 			"sourceMapPathOverrides": {
-				"webpack:///./*": "${workspaceFolder}/client/*"
+				"webpack:///./*": "${workspaceFolder}/*"
 			}
 		}
 	]

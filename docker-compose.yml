@@ -1,9 +1,0 @@
-version: '3'
-services:
-  bundler:
-    container_name: conb2-bundler
-    image: conb2-bundler:latest
-    build: ./docker/bundler
-    volumes:
-      - ./client:/opt/app
-      - ./public/js:/opt/app/dist
