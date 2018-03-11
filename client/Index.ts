@@ -3,8 +3,7 @@ import { WebviewTag } from 'electron';
 
 class Application {
 	public constructor(
-		public text: string = 'https://github.com/rog-works',
-		public content: string = ''
+		public text: string = 'https://github.com/rog-works'
 	) {}
 
 	public bind(selector: string) {
@@ -17,13 +16,17 @@ class Application {
 				back: this.back.bind(this),
 				forward: this.forward.bind(this),
 				reload: this.reload.bind(this),
-				tools: this.tools.bind(this)
+				openDevTools: this.openDevTools.bind(this)
 			}
 		});
 	}
 
 	public get _webview() {
-		return <WebviewTag>document.querySelector('webview');
+		const webview = document.querySelector('webview');
+		if (!webview) {
+			throw new Error('Not found webview tag');
+		}
+		return <WebviewTag>webview;
 	}
 
 	public get url() {
@@ -54,27 +57,9 @@ class Application {
 		this._webview.reload();
 	}
 
-	public tools() {
-		//if (this._webview.isDevToolsOpened) {
-		//	this._webview.closeDevTools();
-		//} else {
-			this._webview.openDevTools();
-		//}
+	public openDevTools() {
+		this._webview.openDevTools();
 	}
-
-	//reload(url) {
-	//	this.loaded = false;
-	//	fetch(url)
-	//		.then(res => res.text())
-	//		.then(content => {
-	//			this.content = content;
-	//			this.loaded = true;
-	//		})
-	//		.catch(err => {
-	//			this.content = err;
-	//			this.loaded = true;
-	//		});
-	//}
 }
 
 new Application().bind('#main');

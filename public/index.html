@@ -15,7 +15,7 @@
 				<div class="wh-1 grow-fix flex centering" @click="reload"><i class="fa fa-redo"></i></div>
 				<div class="wh-1 grow-flex flex centering"><input type="search" class="fill-x h-hq less" @keyup.enter="load" v-model="text" autocomplete="on"></div>
 			</div>
-			<webview class="fill-x h-1 grow-flex" src="" @dom-ready="preload" @did-start-loading="preload" @keyup.ctrl.73="tools"></webview>
+			<webview class="fill-x h-1 grow-flex" src="" @dom-ready="preload" @did-start-loading="preload" @keyup.ctrl.73="openDevTools"></webview>
 		</div>
 		<script src="./js/bundle.js"></script>
 	</body>
