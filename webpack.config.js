@@ -1,10 +1,11 @@
 const webpack = require('webpack');
-const path = require('path');
 
 module.exports = {
-	entry: './client/Index.ts',
+	entry: {
+		client: './client/Index.ts'
+	},
 	output: {
-		path: path.join(__dirname, './public/js/'),
+		path: `${__dirname}/public/js/`,
 		filename: 'bundle.js'
 	},
 	resolve: {

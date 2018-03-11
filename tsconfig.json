@@ -8,7 +8,8 @@
 		"strictNullChecks": true
 	},
 	"include": [
-		"./app/**/*.ts"
+		"./app/**/*.ts",
+		"./webview/**/*.ts"
 	],
 	"exclude": [
 		"./node_modules"

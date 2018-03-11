@@ -4,7 +4,7 @@
   "license": "MIT",
   "description": "contents browser with electron",
   "repository": "git@github.com:rog-works/conb2.git",
-  "main": "dist/Index.js",
+  "main": "dist/app/Index.js",
   "dependencies": {},
   "scripts": {
     "build": "tsc",
