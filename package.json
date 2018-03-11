@@ -8,7 +8,8 @@
   "dependencies": {},
   "scripts": {
     "build": "tsc",
-    "run": "npm run build && electron dist",
+    "start": "npm run build && electron dist",
+    "bundle": "webpack --progress --colors --display-error-details --mode development",
     "watch": "webpack --progress --colors --display-error-details --mode development --watch"
   },
   "devDependencies": {
