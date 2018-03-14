@@ -36,7 +36,7 @@ class Application {
 	}
 
 	public get url() {
-		return this.webview.getAttribute('src');
+		return this.webview.getAttribute('src') || '';
 	}
 
 	public set url(value: string) {
@@ -44,7 +44,7 @@ class Application {
 	}
 
 	public get preload() {
-		return this.webview.getAttribute('preload');
+		return this.webview.getAttribute('preload') || '';
 	}
 
 	public set preload(value: string) {
