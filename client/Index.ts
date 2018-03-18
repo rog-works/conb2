@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import { WebviewTag } from 'electron';
+import { URI } from './lib/URI';
+import { ContentProvider } from './core/ContentProvider';
 
 interface EventHandlers {
 	[key: string]: Function[];
@@ -51,9 +53,15 @@ class Application {
 		this.webview.setAttribute('preload', value);
 	}
 
-	public load() {
-		this.preload = 'file://c:\\work\\app\\server\\conb2\\dist\\webview\\Index.js'; // FIXME to workspace path
-		this.url = this.text;
+	public get webpreferences() {
+		return '';
+	}
+
+	public async load() {
+		// this.preload = 'file://c:\\work\\app\\server\\conb2\\dist\\webview\\Index.js'; // FIXME to workspace path
+		// this.url = this.text;
+		const provider = ContentProvider.get(new URI(this.text));
+		const body = await provider.fetch<string>();
 	}
 
 	public prepare() {

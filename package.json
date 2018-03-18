@@ -5,7 +5,10 @@
   "description": "contents browser with electron",
   "repository": "git@github.com:rog-works/conb2.git",
   "main": "dist/app/Index.js",
-  "dependencies": {},
+  "dependencies": {
+    "@types/superagent": "^3.5.7",
+    "superagent": "^3.8.2"
+  },
   "scripts": {
     "build": "tsc",
     "start": "npm run build && electron dist",
