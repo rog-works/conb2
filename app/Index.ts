@@ -26,7 +26,7 @@ class Application {
 
 	private onFilePathRequest(req: electron.InterceptFileProtocolRequest, callback: (filePath: string) => void) {
 		const url = req.url.substr('file://'.length);
-		const path = Path.isAbsolute(url) ? Path.normalize(Path.join(__dirname, '../../', 'public', url)) : url;
+		const path = Path.isAbsolute(url) ? Path.normalize(Path.join(__dirname, '../../', 'assets', url)) : url;
 		callback(path);
 	}
 }
