@@ -3,17 +3,27 @@
 	<head>
 		<meta charset="utf8">
 		<title>Electron with TypeScript</title>
+		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 		<link href="./vendors/normalize-5.0.0.min.css" rel="stylesheet">
 		<link href="./css/style.css" rel="stylesheet">
-		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 	</head>
 	<body class="fill">
 		<div id="main" class="fill bc-1 flex column">
-			<div class="fill-x h-1 bc-2 grow-fix flex">
-				<div class="wh-1 grow-fix flex centering" @click="back"><i class="fa fa-arrow-left"></i></div>
-				<div class="wh-1 grow-fix flex centering" @click="forward"><i class="fa fa-arrow-right"></i></div>
-				<div class="wh-1 grow-fix flex centering" @click="reload"><i class="fa fa-redo"></i></div>
-				<div class="wh-1 grow-flex flex centering"><input type="search" class="fill-x h-hq less" @keyup.enter="load" v-model="text" autocomplete="on"></div>
+			<div class="fill-x h-hq bc-2 grow-fix flex">
+				<div class="w-4 h-hq bc-2 grow-fix table">
+					<i class="w-1 h-hq cell center fa fa-arrow-left"></i>
+					<div class="w-3 h-hq cell middle">hoge</div>
+				</div>
+				<div class="w-4 h-hq bc-3 grow-fix table">
+					<i class="w-1 h-hq cell center fa fa-arrow-left"></i>
+					<div class="w-3 h-hq cell middle">fuga</div>
+				</div>
+			</div>
+			<div class="fill-x h-1 bc-2 grow-fix flex center">
+				<i class="wh-1 grow-fix flex center fa fa-arrow-left" @click="back"></i>
+				<i class="wh-1 grow-fix flex center fa fa-arrow-right" @click="forward"></i>
+				<i class="wh-1 grow-fix flex center fa fa-redo" @click="reload"></i>
+				<input type="search" class="h-hq grow-flex less" @keyup.enter="load" v-model="text" autocomplete="on">
 			</div>
 			<webview class="fill-x h-1 grow-flex" v-model="webpreferences" src="" @dom-ready="prepare" @did-start-loading="prepare" @keyup.ctrl.73="openDevTools"></webview>
 		</div>
