@@ -9,23 +9,29 @@
 	</head>
 	<body class="fill">
 		<div id="main" class="fill bc-1 flex column">
-			<div class="fill-x h-hq bc-2 grow-fix flex">
-				<div class="w-4 h-hq bc-2 grow-fix table">
-					<i class="w-1 h-hq cell center fa fa-arrow-left"></i>
-					<div class="w-3 h-hq cell middle">hoge</div>
+			<div class="fill-x h-hq bc-2 fix flex">
+				<div class="w-6 h-hq bc-2 fix flex">
+					<div class="wh-hq fix flex center">
+						<img src="http://www.google.com/s2/favicons?domain=github.com">
+					</div>
+					<div class="fit h-hq flex row-center">GitHub</div>
+					<i class="wh-hq fix flex center fa fa-times"></i>
 				</div>
-				<div class="w-4 h-hq bc-3 grow-fix table">
-					<i class="w-1 h-hq cell center fa fa-arrow-left"></i>
-					<div class="w-3 h-hq cell middle">fuga</div>
+				<div class="w-6 h-hq bc-1 fix flex">
+					<div class="wh-hq fix flex center">
+						<img src="http://www.google.com/s2/favicons?domain=localhost">
+					</div>
+					<div class="fit h-hq flex row-center">localhost</div>
+					<i class="wh-hq fix flex center fa fa-times"></i>
 				</div>
 			</div>
-			<div class="fill-x h-1 bc-2 grow-fix flex center">
-				<i class="wh-1 grow-fix flex center fa fa-arrow-left" @click="back"></i>
-				<i class="wh-1 grow-fix flex center fa fa-arrow-right" @click="forward"></i>
-				<i class="wh-1 grow-fix flex center fa fa-redo" @click="reload"></i>
-				<input type="search" class="h-hq grow-flex less" @keyup.enter="load" v-model="text" autocomplete="on">
+			<div class="fill-x h-1 bc-2 fix flex center">
+				<i class="wh-1 fix flex center fa fa-arrow-left" @click="back"></i>
+				<i class="wh-1 fix flex center fa fa-arrow-right" @click="forward"></i>
+				<i class="wh-1 fix flex center fa fa-redo" @click="reload"></i>
+				<input type="search" class="fit h-hq less" @keyup.enter="load" v-model="text" autocomplete="on">
 			</div>
-			<webview class="fill-x h-1 grow-flex" v-model="webpreferences" src="" @dom-ready="prepare" @did-start-loading="prepare" @keyup.ctrl.73="openDevTools"></webview>
+			<webview class="fill-x fit" v-model="webpreferences" src="" @dom-ready="prepare" @did-start-loading="prepare" @keyup.ctrl.73="openDevTools"></webview>
 		</div>
 		<script src="./js/bundle.js"></script>
 	</body>
