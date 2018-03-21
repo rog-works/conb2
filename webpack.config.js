@@ -5,7 +5,7 @@ module.exports = {
 		client: './client/Index.ts'
 	},
 	output: {
-		path: `${__dirname}/public/js/`,
+		path: `${__dirname}/assets/js/`,
 		filename: 'bundle.js'
 	},
 	resolve: {
@@ -25,5 +25,6 @@ module.exports = {
 	watchOptions: {
 		poll: 500
 	},
-	devtool: 'source-map'
+	devtool: 'source-map',
+	target: 'electron-renderer'
 };

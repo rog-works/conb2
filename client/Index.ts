@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { WebviewTag } from 'electron';
+import { WebviewTag, ipcRenderer, Event } from 'electron';
 import { URI } from './lib/URI';
 import { ContentProvider } from './core/ContentProvider';
 
@@ -10,10 +10,12 @@ interface EventHandlers {
 class Application {
 	public constructor(
 		public text: string = 'https://github.com/rog-works',
+		public webpreferences: string = '',
 		private readonly handlers: EventHandlers = {}
 	) {}
 
 	public bind(selector: string) {
+		console.log('On Render initialized', new Date);
 		new Vue({
 			el: selector,
 			data: this,
@@ -26,7 +28,11 @@ class Application {
 				openDevTools: this.openDevTools.bind(this)
 			}
 		});
-		this.on('preload', this.onPreload.bind(this))
+		this.on('preload', this.onPreload.bind(this));
+		ipcRenderer.send('message', 'preload');
+		ipcRenderer.on('reply', (e: Event, data: any) => {
+			console.log('On Reply', new Date, e, data);
+		});
 	}
 
 	private get webview() {
@@ -53,15 +59,11 @@ class Application {
 		this.webview.setAttribute('preload', value);
 	}
 
-	public get webpreferences() {
-		return '';
-	}
-
 	public async load() {
 		// this.preload = 'file://c:\\work\\app\\server\\conb2\\dist\\webview\\Index.js'; // FIXME to workspace path
-		// this.url = this.text;
-		const provider = ContentProvider.get(new URI(this.text));
-		const body = await provider.fetch<string>();
+		this.url = this.text;
+		// const provider = ContentProvider.get(new URI(this.text));
+		// const body = await provider.fetch<string>();
 	}
 
 	public prepare() {
@@ -85,7 +87,7 @@ class Application {
 	}
 
 	private onPreload(data: any) {
-		console.log('On Preload', data);
+		console.log('On Preload', new Date, data);
 	}
 
 	public on(tag: string, callback: Function) {

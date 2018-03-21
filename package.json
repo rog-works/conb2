@@ -7,6 +7,7 @@
   "main": "dist/app/Index.js",
   "dependencies": {
     "@types/superagent": "^3.5.7",
+    "moment": "^2.21.0",
     "superagent": "^3.8.2"
   },
   "scripts": {
