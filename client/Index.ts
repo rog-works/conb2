@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { WebviewTag, ipcRenderer, Event } from 'electron';
 import { URI } from './lib/URI';
-import { ContentProvider } from './core/ContentProvider';
+import { Provider } from './content/Provider';
 
 interface EventHandlers {
 	[key: string]: Function[];
@@ -61,9 +61,8 @@ class Application {
 
 	public async load() {
 		// this.preload = 'file://c:\\work\\app\\server\\conb2\\dist\\webview\\Index.js'; // FIXME to workspace path
-		this.url = this.text;
-		// const provider = ContentProvider.get(new URI(this.text));
-		// const body = await provider.fetch<string>();
+		// this.url = this.text;
+		const body = await Provider.fetch<string>(new URI(this.text));
 	}
 
 	public prepare() {
