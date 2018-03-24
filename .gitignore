@@ -1,4 +1,5 @@
 /dist/
 /node_modules/
 bundle.js*
+/assets/cache/*.html
 

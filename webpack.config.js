@@ -19,6 +19,13 @@ module.exports = {
 			{
 				test: /\.ts$/,
 				use: 'ts-loader'
+			},
+			{
+				test: /\.(yml|yaml)$/,
+				use: [
+					{ loader: require.resolve('json-loader') },
+					{ loader: require.resolve('yaml-loader') },
+				]
 			}
 		]
 	},

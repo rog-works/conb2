@@ -1,6 +1,10 @@
-import * as Electron from 'electron';
+import * as fs from 'fs';
 import * as Path from 'path';
+import * as Electron from 'electron';
 import * as Moment from 'moment';
+import { URI } from './lang/URI';
+import { Sign } from './security/Sign';
+import { Provider } from './content/Provider';
 
 class Application {
 	public constructor(
@@ -14,6 +18,7 @@ class Application {
 		this.app.on('window-all-closed', this.onWindowAllClosed.bind(this));
 		this.app.on('ready', this.onReady.bind(this));
 		Electron.ipcMain.on('message', this.onMessage.bind(this));
+		Electron.ipcMain.on('prefetch', this.onPrefetch.bind(this));
 	}
 
 	private onWindowAllClosed() {
@@ -39,6 +44,20 @@ class Application {
 	private onMessage(e: Electron.Event, data: any) {
 		console.log('On Message', Moment().format('YYYY-MM-DD HH:mm:ss'), data);
 		e.sender.send('reply', 'message received');
+	}
+
+	private async onPrefetch(e: Electron.Event, uriStr: string) {
+		console.log('On Pre fetch', Moment().format('YYYY-MM-DD HH:mm:ss'), uriStr);
+		const uri = new URI(uriStr);
+		if (Provider.canFetch(uri)) {
+			const body = await Provider.fetch<string>(uri);
+			const webPath = Path.join('/cache', `${Sign.digest(uri.full)}.html`);
+			const storagePath = Path.join(__dirname, '../../assets/', webPath);
+			fs.writeFileSync(storagePath, body);
+			e.sender.send('postfetch', webPath);
+		} else {
+			e.sender.send('postfetch', uriStr);
+		}
 	}
 }
 

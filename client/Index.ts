@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import { WebviewTag, ipcRenderer, Event } from 'electron';
-import { URI } from './lib/URI';
-import { Provider } from './content/Provider';
+import { URI } from './lang/URI';
 
 interface EventHandlers {
 	[key: string]: Function[];
@@ -62,7 +61,12 @@ class Application {
 	public async load() {
 		// this.preload = 'file://c:\\work\\app\\server\\conb2\\dist\\webview\\Index.js'; // FIXME to workspace path
 		// this.url = this.text;
-		const body = await Provider.fetch<string>(new URI(this.text));
+		ipcRenderer.send('prefetch', this.text);
+		ipcRenderer.on('postfetch', (e: Event, path: any) => {
+			console.log('On Post fetch', new Date, path);
+			this.url = `file://${path}`;
+		});
+
 	}
 
 	public prepare() {

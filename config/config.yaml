@@ -1,0 +1,11 @@
+pipeline:
+  input:
+    web:
+      uri: '^https?:'
+      handler: '../plugins/Web.js'
+      tag: input.web
+  output:
+    html:
+      match: '^input.web$'
+      handler: '../plugins/Html.js'
+      tag: output.html

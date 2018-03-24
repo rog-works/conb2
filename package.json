@@ -6,9 +6,15 @@
   "repository": "git@github.com:rog-works/conb2.git",
   "main": "dist/app/Index.js",
   "dependencies": {
+    "@types/crypto-js": "^3.1.38",
     "@types/superagent": "^3.5.7",
+    "@types/yamljs": "^0.2.30",
+    "crypto-js": "^3.1.9-1",
+    "json-loader": "^0.5.7",
     "moment": "^2.21.0",
-    "superagent": "^3.8.2"
+    "superagent": "^3.8.2",
+    "yaml-loader": "^0.5.0",
+    "yamljs": "^0.3.0"
   },
   "scripts": {
     "build": "tsc",
