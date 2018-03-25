@@ -62,9 +62,9 @@ class Application {
 		// this.preload = 'file://c:\\work\\app\\server\\conb2\\dist\\webview\\Index.js'; // FIXME to workspace path
 		// this.url = this.text;
 		ipcRenderer.send('prefetch', this.text);
-		ipcRenderer.on('postfetch', (e: Event, path: any) => {
-			console.log('On Post fetch', new Date, path);
-			this.url = `file://${path}`;
+		ipcRenderer.on('postfetch', (e: Event, uri: any) => {
+			console.log('On Post fetch', new Date, uri);
+			this.url = uri;
 		});
 
 	}

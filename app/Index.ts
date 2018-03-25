@@ -54,7 +54,7 @@ class Application {
 			const webPath = Path.join('/cache', `${Sign.digest(uri.full)}.html`);
 			const storagePath = Path.join(__dirname, '../../assets/', webPath);
 			fs.writeFileSync(storagePath, body);
-			e.sender.send('postfetch', webPath);
+			e.sender.send('postfetch', `file://${webPath}`);
 		} else {
 			e.sender.send('postfetch', uriStr);
 		}
