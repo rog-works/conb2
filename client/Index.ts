@@ -1,3 +1,4 @@
+import * as Path from 'path';
 import Vue from 'vue';
 import { WebviewTag, ipcRenderer, Event } from 'electron';
 import { URI } from './lang/URI';
@@ -10,6 +11,7 @@ class Application {
 	public constructor(
 		public text: string = 'https://github.com/rog-works',
 		public webpreferences: string = '',
+		private cwd: string = '',
 		private readonly handlers: EventHandlers = {}
 	) {}
 
@@ -28,9 +30,10 @@ class Application {
 			}
 		});
 		this.on('preload', this.onPreload.bind(this));
-		ipcRenderer.send('message', 'preload');
-		ipcRenderer.on('reply', (e: Event, data: any) => {
-			console.log('On Reply', new Date, e, data);
+		ipcRenderer.send('renderer-ready', 'ready');
+		ipcRenderer.on('reply-renderer-ready', (e: Event, data: any) => {
+			console.log('On Reply renderer ready', new Date, e, data);
+			this.cwd = data.cwd;
 		});
 	}
 
@@ -59,12 +62,11 @@ class Application {
 	}
 
 	public async load() {
-		// this.preload = 'file://c:\\work\\app\\server\\conb2\\dist\\webview\\Index.js'; // FIXME to workspace path
-		// this.url = this.text;
-		ipcRenderer.send('prefetch', this.text);
-		ipcRenderer.on('postfetch', (e: Event, uri: any) => {
-			console.log('On Post fetch', new Date, uri);
-			this.url = uri;
+		this.preload = Path.join(this.cwd, 'dist/webview/Index.js'); // XXX
+		ipcRenderer.send('webview-prefetch', { uri: this.text });
+		ipcRenderer.on('reply-webview-prefetch', (e: Event, data: any) => {
+			console.log('On Reply webview prefetch', new Date, data);
+			this.url = data.uri;
 		});
 
 	}

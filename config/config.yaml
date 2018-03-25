@@ -1,7 +1,7 @@
 pipeline:
   input:
     web:
-      uri: '^https?:'
+      uri: '^https?://github.com/'
       handler: '../plugins/Web.js'
       tag: input.web
   output:
