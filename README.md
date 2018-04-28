@@ -13,6 +13,7 @@ conb2
 * Webpack
 * Font Awesome
 * Normalize CSS
+* Lunr.js
 
 # Usage
 
